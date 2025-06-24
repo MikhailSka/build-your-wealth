@@ -1,36 +1,113 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Build Your Wealth - Investment Learning Platform
+
+A modern Next.js application for learning investment strategies through video lessons, interactive calculators, and visualizations.
+
+## Features
+
+- 🎥 **Video Lessons**: Structured learning path with YouTube integration
+- 🔍 **Smart Search**: Real-time search across lesson titles, descriptions, and tags
+- 📊 **Interactive Elements**: Calculators, charts, and visualizations
+- 📱 **Responsive Design**: Works perfectly on desktop and mobile
+- 🎨 **Modern UI**: Beautiful gradient design with smooth animations
+- 🔐 **User Profiles**: Track progress and manage preferences
+
+## Project Structure
+
+```
+src/
+├── app/                    # Next.js App Router
+│   ├── page.tsx           # Main page component
+│   ├── layout.tsx         # Root layout
+│   └── globals.css        # Global styles
+├── components/            # Reusable components
+│   ├── Header/           # Header with search and profile
+│   ├── SearchBar/        # Search functionality
+│   ├── ProfileMenu/      # User profile dropdown
+│   ├── Timeline/         # Lesson timeline display
+│   └── TimelineItem/     # Individual lesson cards
+├── data/                 # Static data and configurations
+│   └── lessons.ts        # Lesson data (easily configurable)
+├── types/                # TypeScript type definitions
+│   └── lesson.ts         # Lesson interface
+└── utils/                # Utility functions
+    └── supabaseClient.ts # Supabase integration
+```
 
 ## Getting Started
 
-First, run the development server:
+1. **Install dependencies:**
+   ```bash
+   npm install
+   ```
 
+2. **Set up environment variables:**
+   Create a `.env.local` file:
+   ```env
+   NEXT_PUBLIC_SUPABASE_URL=your-supabase-url
+   NEXT_PUBLIC_SUPABASE_ANON_KEY=your-supabase-anon-key
+   ```
+
+3. **Run the development server:**
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+4. **Open [http://localhost:3000](http://localhost:3000) in your browser.**
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Adding New Lessons
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+To add new lessons, simply update the `src/data/lessons.ts` file:
 
-## Learn More
+```typescript
+{
+  id: '6',
+  title: 'Your New Lesson',
+  description: 'Lesson description...',
+  duration: '25:00',
+  difficulty: 'Beginner',
+  category: 'Your Category',
+  tags: ['tag1', 'tag2'],
+  youtubeUrl: 'https://youtube.com/watch?v=your-video',
+  publishedAt: '2024-02-20',
+  hasCalculator: true,
+  hasCharts: true,
+  hasVisualizations: false
+}
+```
 
-To learn more about Next.js, take a look at the following resources:
+## Design Principles
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- **DRY (Don't Repeat Yourself)**: Components are reusable and modular
+- **SOLID Principles**: Each component has a single responsibility
+- **Type Safety**: Full TypeScript support with proper interfaces
+- **Accessibility**: Semantic HTML and keyboard navigation
+- **Performance**: Optimized for fast loading and smooth interactions
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Deployment
 
-## Deploy on Vercel
+The project is configured for easy deployment on Vercel:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+1. Push your code to GitHub
+2. Connect your repository to Vercel
+3. Add environment variables in Vercel dashboard
+4. Deploy automatically on every push
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Technologies Used
+
+- **Next.js 14** - React framework with App Router
+- **TypeScript** - Type safety and better developer experience
+- **Tailwind CSS** - Utility-first CSS framework
+- **Supabase** - Backend as a Service (database, auth, etc.)
+- **Vercel** - Deployment platform
+
+## Contributing
+
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Test thoroughly
+5. Submit a pull request
+
+## License
+
+MIT License - feel free to use this project for your own learning platform!

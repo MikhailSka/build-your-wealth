@@ -1,0 +1,28 @@
+export const calculatorsTranslations = {
+  en: {
+    title: 'Financial Calculators',
+    subtitle: 'Powerful tools to help you plan and optimize your financial decisions.',
+    comingSoon: 'Coming Soon',
+    compound: 'Compound Interest Calculator',
+    compoundDesc: 'Calculate the power of compound interest over time',
+    retirement: 'Retirement Planning Calculator',
+    retirementDesc: 'Plan your retirement savings and goals',
+    mortgage: 'Mortgage Calculator',
+    mortgageDesc: 'Calculate mortgage payments and interest',
+    investment: 'Investment Return Calculator',
+    investmentDesc: 'Analyze potential investment returns',
+  },
+  ru: {
+    title: 'Финансовые Калькуляторы',
+    subtitle: 'Мощные инструменты для планирования и оптимизации ваших финансовых решений.',
+    comingSoon: 'Скоро',
+    compound: 'Калькулятор Сложного Процента',
+    compoundDesc: 'Рассчитайте силу сложного процента во времени',
+    retirement: 'Калькулятор Пенсионного Планирования',
+    retirementDesc: 'Планируйте свои пенсионные накопления и цели',
+    mortgage: 'Ипотечный Калькулятор',
+    mortgageDesc: 'Рассчитайте ипотечные платежи и проценты',
+    investment: 'Калькулятор Доходности Инвестиций',
+    investmentDesc: 'Анализируйте потенциальную доходность инвестиций',
+  },
+}; 

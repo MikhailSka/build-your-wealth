@@ -1,0 +1,109 @@
+.theme-toggle {
+  position: relative;
+  display: inline-block;
+}
+
+.theme-toggle-button {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-full);
+  width: 44px;
+  height: 44px;
+  cursor: pointer;
+  transition: all var(--transition-normal) ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-primary);
+  position: relative;
+  overflow: hidden;
+}
+
+.theme-toggle-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--gradient-primary);
+  opacity: 0;
+  transition: opacity var(--transition-normal) ease;
+  border-radius: var(--radius-full);
+}
+
+.theme-toggle-button:hover {
+  background: var(--bg-tertiary);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--primary-300);
+}
+
+.theme-toggle-button:hover::before {
+  opacity: 0.1;
+}
+
+.theme-toggle-button:active {
+  transform: translateY(0);
+}
+
+.theme-icon {
+  width: 20px;
+  height: 20px;
+  color: var(--text-primary);
+  transition: all var(--transition-normal) ease;
+  position: relative;
+  z-index: 1;
+}
+
+.theme-toggle-button:hover .theme-icon {
+  color: var(--primary-600);
+  transform: rotate(15deg) scale(1.1);
+}
+
+/* Dark mode specific styles */
+[data-theme="dark"] .theme-toggle-button {
+  background: var(--bg-secondary);
+  border-color: var(--border-primary);
+}
+
+[data-theme="dark"] .theme-toggle-button:hover {
+  background: var(--bg-tertiary);
+  border-color: var(--primary-300);
+}
+
+[data-theme="dark"] .theme-icon {
+  color: var(--text-primary);
+}
+
+[data-theme="dark"] .theme-toggle-button:hover .theme-icon {
+  color: var(--primary-400);
+}
+
+/* Animation for icon transition */
+.theme-icon {
+  animation: iconFadeIn 0.3s ease-out;
+}
+
+@keyframes iconFadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.8) rotate(-15deg);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+  }
+}
+
+@media (max-width: 768px) {
+  .theme-toggle-button {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .theme-icon {
+    width: 18px;
+    height: 18px;
+  }
+} 

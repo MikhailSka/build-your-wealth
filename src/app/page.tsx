@@ -1,103 +1,307 @@
-import Image from "next/image";
+'use client';
+
+import { Header } from '@/components/Header/Header';
+import { FinancialBackground } from '@/components/FinancialBackground/FinancialBackground';
+import { useTheme } from '@/contexts/ThemeContext';
+import { useLanguage } from '@/contexts/LanguageContext';
+import { BookOpen, Calculator, TrendingUp, Shield, Target, Users } from 'lucide-react';
+import Link from 'next/link';
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+  const { theme } = useTheme();
+  const { t } = useLanguage();
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+  const features = [
+    {
+      icon: BookOpen,
+      title: t('home.features.lessons'),
+      description: t('home.features.lessons.desc'),
+    },
+    {
+      icon: Calculator,
+      title: t('home.features.calculators'),
+      description: t('home.features.calculators.desc'),
+    },
+    {
+      icon: TrendingUp,
+      title: t('home.features.tracking'),
+      description: t('home.features.tracking.desc'),
+    },
+    {
+      icon: Shield,
+      title: 'Risk Management',
+      description: 'Understand how to protect your investments and manage risk effectively.',
+    },
+    {
+      icon: Target,
+      title: 'Goal-Oriented',
+      description: 'Set and achieve your financial goals with our systematic approach.',
+    },
+    {
+      icon: Users,
+      title: 'Community Support',
+      description: 'Join a community of learners on their wealth-building journey.',
+    },
+  ];
+
+  return (
+    <FinancialBackground>
+      <Header />
+      <main className="relative">
+          {/* Hero Section */}
+          <section className="hero-section">
+            <div className="max-width-container">
+              <div className="hero-content">
+                <h1 className="hero-title">
+                  {t('home.welcome')}
+                </h1>
+                <p className="hero-description">
+                  {t('home.subtitle')}
+                </p>
+                <div className="hero-actions">
+                  <Link href="/lessons" className="cta-button primary">
+                    {t('home.cta.start')}
+                    <BookOpen size={20} />
+                  </Link>
+                  <Link href="/calculators" className="cta-button secondary">
+                    {t('home.cta.explore')}
+                    <Calculator size={20} />
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          {/* Features Section */}
+          <section className="features-section">
+            <div className="max-width-container">
+              <div className="features-header">
+                <h2>Everything You Need to Build Wealth</h2>
+                <p>Comprehensive tools and resources for your investment journey</p>
+              </div>
+              <div className="features-grid">
+                {features.map((feature, index) => {
+                  const IconComponent = feature.icon;
+                  return (
+                    <div key={index} className="feature-card">
+                      <div className="feature-icon">
+                        <IconComponent size={28} />
+                      </div>
+                      <div className="feature-content">
+                        <h3>{feature.title}</h3>
+                        <p>{feature.description}</p>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          </section>
+        </main>
+
+      <style jsx>{`
+        .max-width-container {
+          max-width: 1400px;
+          margin: 0 auto;
+          padding: 0 2rem;
+        }
+
+        .hero-section {
+          padding: 6rem 0 8rem;
+          text-align: center;
+        }
+
+        .hero-content {
+          max-width: 800px;
+          margin: 0 auto;
+        }
+
+        .hero-title {
+          font-size: 4rem;
+          font-weight: 900;
+          line-height: 1.1;
+          color: var(--text-primary);
+          margin-bottom: 1.5rem;
+          letter-spacing: -0.025em;
+        }
+
+        .hero-highlight {
+          background: var(--gradient-hero);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
+        }
+
+        .hero-description {
+          font-size: 1.25rem;
+          color: var(--text-secondary);
+          line-height: 1.7;
+          margin-bottom: 3rem;
+          max-width: 600px;
+          margin-left: auto;
+          margin-right: auto;
+        }
+
+        .hero-actions {
+          display: flex;
+          gap: 1rem;
+          justify-content: center;
+          flex-wrap: wrap;
+        }
+
+        .cta-button {
+          display: inline-flex;
+          align-items: center;
+          gap: 0.5rem;
+          padding: 1rem 2rem;
+          border-radius: var(--radius-lg);
+          font-weight: 600;
+          font-size: 1.125rem;
+          text-decoration: none;
+          transition: all var(--transition-normal) cubic-bezier(0.4, 0, 0.2, 1);
+          border: 2px solid transparent;
+        }
+
+        .cta-button.primary {
+          background: var(--gradient-hero);
+          color: white;
+          box-shadow: var(--shadow-lg);
+        }
+
+        .cta-button.primary:hover {
+          transform: translateY(-2px);
+          box-shadow: var(--shadow-xl);
+        }
+
+        .cta-button.secondary {
+          background: var(--bg-secondary);
+          color: var(--text-primary);
+          border-color: var(--border-primary);
+        }
+
+        .cta-button.secondary:hover {
+          background: var(--bg-tertiary);
+          border-color: var(--primary-300);
+          transform: translateY(-2px);
+          box-shadow: var(--shadow-md);
+        }
+
+        .features-section {
+          padding: 4rem 0 6rem;
+        }
+
+        .features-header {
+          text-align: center;
+          margin-bottom: 4rem;
+        }
+
+        .features-header h2 {
+          font-size: 2.5rem;
+          font-weight: 800;
+          color: var(--text-primary);
+          margin-bottom: 1rem;
+          letter-spacing: -0.025em;
+        }
+
+        .features-header p {
+          font-size: 1.125rem;
+          color: var(--text-secondary);
+          max-width: 600px;
+          margin: 0 auto;
+          line-height: 1.6;
+        }
+
+        .features-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+          gap: 2rem;
+        }
+
+        .feature-card {
+          background: var(--bg-secondary);
+          border: 1px solid var(--border-primary);
+          border-radius: var(--radius-xl);
+          padding: 2rem;
+          transition: all var(--transition-normal) ease;
+        }
+
+        .feature-card:hover {
+          transform: translateY(-4px);
+          box-shadow: var(--shadow-lg);
+          border-color: var(--primary-300);
+        }
+
+        .feature-icon {
+          width: 56px;
+          height: 56px;
+          background: var(--primary-100);
+          border-radius: var(--radius-lg);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: var(--primary-600);
+          margin-bottom: 1.5rem;
+          transition: all var(--transition-normal) ease;
+        }
+
+        .feature-card:hover .feature-icon {
+          background: var(--primary-200);
+          color: var(--primary-700);
+          transform: scale(1.1);
+        }
+
+        .feature-content h3 {
+          font-size: 1.25rem;
+          font-weight: 700;
+          color: var(--text-primary);
+          margin-bottom: 0.75rem;
+          line-height: 1.3;
+        }
+
+        .feature-content p {
+          color: var(--text-secondary);
+          line-height: 1.6;
+        }
+
+        @media (max-width: 768px) {
+          .hero-section {
+            padding: 3rem 0 4rem;
+          }
+
+          .hero-title {
+            font-size: 2.5rem;
+          }
+
+          .hero-description {
+            font-size: 1.125rem;
+            margin-bottom: 2rem;
+          }
+
+          .hero-actions {
+            flex-direction: column;
+            align-items: center;
+          }
+
+          .cta-button {
+            width: 100%;
+            max-width: 300px;
+            justify-content: center;
+          }
+
+          .features-header h2 {
+            font-size: 2rem;
+          }
+
+          .features-grid {
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+          }
+
+          .feature-card {
+            padding: 1.5rem;
+          }
+        }
+      `}</style>
+    </FinancialBackground>
   );
 }
