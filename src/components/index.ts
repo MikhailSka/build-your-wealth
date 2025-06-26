@@ -6,4 +6,5 @@ export { ProfileMenu } from './ProfileMenu/ProfileMenu';
 export { SearchBar } from './SearchBar/SearchBar';
 export { ThemeToggle } from './ThemeToggle/ThemeToggle';
 export { Timeline } from './Timeline/Timeline';
-export { TimelineItem } from './Timeline/TimelineItem'; 
+export { TimelineItem } from './Timeline/TimelineItem';
+export { YouTubePlayer } from './YouTubePlayer/YouTubePlayer'; 

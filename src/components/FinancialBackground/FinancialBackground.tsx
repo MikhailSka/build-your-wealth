@@ -327,17 +327,7 @@ export const FinancialBackground: React.FC<FinancialBackgroundProps> = ({
             <div className="shape shape-hexagon shape-6"></div>
           </div>
 
-          {/* Grid Pattern */}
-          <div className="grid-pattern">
-            <svg className="grid-svg" viewBox="0 0 100 100">
-              <defs>
-                <pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse">
-                  <path d="M 10 0 L 0 0 0 10" fill="none" stroke="currentColor" strokeWidth="0.5" opacity="0.1"/>
-                </pattern>
-              </defs>
-              <rect width="100%" height="100%" fill="url(#grid)" />
-            </svg>
-          </div>
+
 
           {/* Animated Dots */}
           <div className="animated-dots">

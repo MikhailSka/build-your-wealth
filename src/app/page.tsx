@@ -95,9 +95,9 @@ export default function Home() {
                   );
                 })}
               </div>
-            </div>
+        </div>
           </section>
-        </main>
+      </main>
 
       <style jsx>{`
         .max-width-container {

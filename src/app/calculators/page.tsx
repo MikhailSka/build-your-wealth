@@ -1,20 +1,26 @@
 'use client';
 
+import { useState } from 'react';
 import { Header } from '@/components/Header/Header';
 import { FinancialBackground } from '@/components/FinancialBackground/FinancialBackground';
+import { CalculatorGrid } from '@/components/CalculatorGrid';
+import { CompoundInterestCalculator } from '@/components/calculators';
 import { useTheme } from '@/contexts/ThemeContext';
-import { Calculator, TrendingUp, PieChart, DollarSign } from 'lucide-react';
+import { useLanguage } from '@/contexts/LanguageContext';
+import { Calculator, TrendingUp, PieChart, DollarSign, Home, Shield, CreditCard, Target, Wallet, BarChart3, Percent, Banknote } from 'lucide-react';
 
 export default function CalculatorsPage() {
   const { theme } = useTheme();
+  const { t } = useLanguage();
+  const [activeCalculator, setActiveCalculator] = useState<number | null>(null);
 
   const calculators = [
     {
       id: 1,
-      title: 'Compound Interest Calculator',
-      description: 'Calculate how your investments grow over time with compound interest',
+      title: t('calculators.compound'),
+      description: t('calculators.compound.desc'),
       icon: TrendingUp,
-      comingSoon: true,
+      comingSoon: false,
     },
     {
       id: 2,
@@ -25,8 +31,8 @@ export default function CalculatorsPage() {
     },
     {
       id: 3,
-      title: 'Retirement Planning Calculator',
-      description: 'Plan your retirement savings and estimate future income needs',
+      title: t('calculators.retirement'),
+      description: t('calculators.retirement.desc'),
       icon: DollarSign,
       comingSoon: true,
     },
@@ -37,39 +43,108 @@ export default function CalculatorsPage() {
       icon: Calculator,
       comingSoon: true,
     },
+    {
+      id: 5,
+      title: t('calculators.mortgage'),
+      description: t('calculators.mortgage.desc'),
+      icon: Home,
+      comingSoon: true,
+    },
+    {
+      id: 6,
+      title: 'Emergency Fund Calculator',
+      description: 'Determine how much you need to save for financial emergencies',
+      icon: Shield,
+      comingSoon: true,
+    },
+    {
+      id: 7,
+      title: 'Debt Payoff Calculator',
+      description: 'Create strategies to pay off credit cards and loans faster',
+      icon: CreditCard,
+      comingSoon: true,
+    },
+    {
+      id: 8,
+      title: 'Savings Goal Calculator',
+      description: 'Plan and track progress towards your financial goals',
+      icon: Target,
+      comingSoon: true,
+    },
+    {
+      id: 9,
+      title: 'Net Worth Calculator',
+      description: 'Track your assets and liabilities to monitor wealth growth',
+      icon: Wallet,
+      comingSoon: true,
+    },
+    {
+      id: 10,
+      title: t('calculators.investment'),
+      description: t('calculators.investment.desc'),
+      icon: BarChart3,
+      comingSoon: true,
+    },
+    {
+      id: 11,
+      title: 'Tax Impact Calculator',
+      description: 'Estimate tax implications of your investment decisions',
+      icon: Percent,
+      comingSoon: true,
+    },
+    {
+      id: 12,
+      title: 'Budget Planner Calculator',
+      description: 'Create and optimize your monthly budget allocation',
+      icon: Banknote,
+      comingSoon: true,
+    }
   ];
 
+  const handleCalculatorClick = (calculatorId: number) => {
+    setActiveCalculator(calculatorId);
+  };
+
+  const handleBackToGrid = () => {
+    setActiveCalculator(null);
+  };
+
+  // Show individual calculator if one is active
+  if (activeCalculator) {
+    switch (activeCalculator) {
+      case 1:
+        return (
+          <FinancialBackground>
+            <Header />
+            <main className="relative">
+              <CompoundInterestCalculator onBack={handleBackToGrid} />
+            </main>
+          </FinancialBackground>
+        );
+      default:
+        // For other calculators that aren't implemented yet
+        setActiveCalculator(null);
+        break;
+    }
+  }
+
+  // Show calculator grid
   return (
     <FinancialBackground>
       <Header />
       <main className="relative">
-          <div className="max-width-container">
-            <div className="calculators-header">
-              <h2>Investment Calculators</h2>
-              <p>Powerful tools to help you make informed investment decisions</p>
-            </div>
-
-            <div className="calculators-grid">
-              {calculators.map((calculator) => {
-                const IconComponent = calculator.icon;
-                return (
-                  <div key={calculator.id} className="calculator-card">
-                    <div className="calculator-icon">
-                      <IconComponent size={32} />
-                    </div>
-                    <div className="calculator-content">
-                      <h3>{calculator.title}</h3>
-                      <p>{calculator.description}</p>
-                      {calculator.comingSoon && (
-                        <span className="coming-soon-badge">Coming Soon</span>
-                      )}
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
+        <div className="max-width-container">
+          <div className="calculators-header">
+            <h2>{t('calculators.title')}</h2>
+            <p>{t('calculators.subtitle')}</p>
           </div>
-        </main>
+
+          <CalculatorGrid 
+            calculators={calculators} 
+            onCalculatorClick={handleCalculatorClick}
+          />
+        </div>
+      </main>
 
       <style jsx>{`
         .max-width-container {
@@ -104,93 +179,6 @@ export default function CalculatorsPage() {
           line-height: 1.6;
         }
 
-        .calculators-grid {
-          display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-          gap: 2rem;
-          margin-top: 2rem;
-        }
-
-        .calculator-card {
-          background: var(--bg-secondary);
-          border: 1px solid var(--border-primary);
-          border-radius: var(--radius-xl);
-          padding: 2rem;
-          transition: all var(--transition-normal) cubic-bezier(0.4, 0, 0.2, 1);
-          cursor: pointer;
-          position: relative;
-          overflow: hidden;
-        }
-
-        .calculator-card::before {
-          content: '';
-          position: absolute;
-          top: 0;
-          left: 0;
-          right: 0;
-          bottom: 0;
-          background: var(--gradient-hero);
-          opacity: 0;
-          transition: opacity var(--transition-normal) ease;
-          z-index: -1;
-        }
-
-        .calculator-card:hover {
-          transform: translateY(-4px);
-          box-shadow: var(--shadow-lg);
-          border-color: var(--primary-300);
-        }
-
-        .calculator-card:hover::before {
-          opacity: 0.05;
-        }
-
-        .calculator-icon {
-          width: 64px;
-          height: 64px;
-          background: var(--primary-100);
-          border-radius: var(--radius-lg);
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          color: var(--primary-600);
-          margin-bottom: 1.5rem;
-          transition: all var(--transition-normal) ease;
-        }
-
-        .calculator-card:hover .calculator-icon {
-          background: var(--primary-200);
-          color: var(--primary-700);
-          transform: scale(1.1);
-        }
-
-        .calculator-content h3 {
-          font-size: 1.5rem;
-          font-weight: 700;
-          color: var(--text-primary);
-          margin-bottom: 0.75rem;
-          line-height: 1.3;
-        }
-
-        .calculator-content p {
-          color: var(--text-secondary);
-          font-size: 1rem;
-          line-height: 1.6;
-          margin-bottom: 1rem;
-        }
-
-        .coming-soon-badge {
-          display: inline-block;
-          background: var(--accent-100);
-          color: var(--accent-700);
-          font-size: 0.75rem;
-          font-weight: 600;
-          padding: 0.25rem 0.75rem;
-          border-radius: var(--radius-full);
-          text-transform: uppercase;
-          letter-spacing: 0.05em;
-        }
-
         @media (max-width: 768px) {
           .max-width-container {
             padding: 2rem 1rem;
@@ -202,15 +190,6 @@ export default function CalculatorsPage() {
 
           .calculators-header p {
             font-size: 1rem;
-          }
-
-          .calculators-grid {
-            grid-template-columns: 1fr;
-            gap: 1.5rem;
-          }
-
-          .calculator-card {
-            padding: 1.5rem;
           }
         }
       `}</style>

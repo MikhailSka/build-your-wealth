@@ -7,6 +7,7 @@ import { homeTranslations } from '../app/home.i18n';
 import { lessonsTranslations } from '../app/lessons/lessons.i18n';
 import { calculatorsTranslations } from '../app/calculators/calculators.i18n';
 import { commonTranslations } from './common.i18n';
+import { compoundInterestCalculatorTranslations } from '../components/calculators/CompoundInterestCalculator/CompoundInterestCalculator.i18n';
 
 // Helper function to merge translations for a language
 function mergeTranslations(lang: 'en' | 'ru') {
@@ -58,6 +59,68 @@ function mergeTranslations(lang: 'en' | 'ru') {
     'calculators.mortgage.desc': calculatorsTranslations[lang].mortgageDesc,
     'calculators.investment': calculatorsTranslations[lang].investment,
     'calculators.investment.desc': calculatorsTranslations[lang].investmentDesc,
+    
+    // Compound Interest Calculator
+    'compoundCalculator.title': compoundInterestCalculatorTranslations[lang].title,
+    'compoundCalculator.description': compoundInterestCalculatorTranslations[lang].description,
+    'compoundCalculator.backButton': compoundInterestCalculatorTranslations[lang].backButton,
+    
+    // Input Section
+    'compoundCalculator.inputSection.title': compoundInterestCalculatorTranslations[lang].inputSection.title,
+    'compoundCalculator.inputSection.startingAmount.label': compoundInterestCalculatorTranslations[lang].inputSection.startingAmount.label,
+    'compoundCalculator.inputSection.startingAmount.info': compoundInterestCalculatorTranslations[lang].inputSection.startingAmount.info,
+    'compoundCalculator.inputSection.investmentPeriod.label': compoundInterestCalculatorTranslations[lang].inputSection.investmentPeriod.label,
+    'compoundCalculator.inputSection.investmentPeriod.info': compoundInterestCalculatorTranslations[lang].inputSection.investmentPeriod.info,
+    'compoundCalculator.inputSection.returnRate.label': compoundInterestCalculatorTranslations[lang].inputSection.returnRate.label,
+    'compoundCalculator.inputSection.returnRate.info': compoundInterestCalculatorTranslations[lang].inputSection.returnRate.info,
+    'compoundCalculator.inputSection.compound.label': compoundInterestCalculatorTranslations[lang].inputSection.compound.label,
+    'compoundCalculator.inputSection.compound.info': compoundInterestCalculatorTranslations[lang].inputSection.compound.info,
+    'compoundCalculator.inputSection.compound.options.annually': compoundInterestCalculatorTranslations[lang].inputSection.compound.options.annually,
+    'compoundCalculator.inputSection.compound.options.semiAnnually': compoundInterestCalculatorTranslations[lang].inputSection.compound.options.semiAnnually,
+    'compoundCalculator.inputSection.compound.options.quarterly': compoundInterestCalculatorTranslations[lang].inputSection.compound.options.quarterly,
+    'compoundCalculator.inputSection.compound.options.monthly': compoundInterestCalculatorTranslations[lang].inputSection.compound.options.monthly,
+    'compoundCalculator.inputSection.compound.options.daily': compoundInterestCalculatorTranslations[lang].inputSection.compound.options.daily,
+    'compoundCalculator.inputSection.regularContribution.label': compoundInterestCalculatorTranslations[lang].inputSection.regularContribution.label,
+    'compoundCalculator.inputSection.regularContribution.info': compoundInterestCalculatorTranslations[lang].inputSection.regularContribution.info,
+    'compoundCalculator.inputSection.contributionFrequency.label': compoundInterestCalculatorTranslations[lang].inputSection.contributionFrequency.label,
+    'compoundCalculator.inputSection.contributionFrequency.info': compoundInterestCalculatorTranslations[lang].inputSection.contributionFrequency.info,
+    'compoundCalculator.inputSection.contributionFrequency.options.none': compoundInterestCalculatorTranslations[lang].inputSection.contributionFrequency.options.none,
+    'compoundCalculator.inputSection.contributionFrequency.options.monthly': compoundInterestCalculatorTranslations[lang].inputSection.contributionFrequency.options.monthly,
+    'compoundCalculator.inputSection.contributionFrequency.options.quarterly': compoundInterestCalculatorTranslations[lang].inputSection.contributionFrequency.options.quarterly,
+    'compoundCalculator.inputSection.contributionFrequency.options.annually': compoundInterestCalculatorTranslations[lang].inputSection.contributionFrequency.options.annually,
+    'compoundCalculator.inputSection.contributionTiming.label': compoundInterestCalculatorTranslations[lang].inputSection.contributionTiming.label,
+    'compoundCalculator.inputSection.contributionTiming.info': compoundInterestCalculatorTranslations[lang].inputSection.contributionTiming.info,
+    'compoundCalculator.inputSection.contributionTiming.options.beginning': compoundInterestCalculatorTranslations[lang].inputSection.contributionTiming.options.beginning,
+    'compoundCalculator.inputSection.contributionTiming.options.end': compoundInterestCalculatorTranslations[lang].inputSection.contributionTiming.options.end,
+    
+    // Results Section
+    'compoundCalculator.resultsSection.title': compoundInterestCalculatorTranslations[lang].resultsSection.title,
+    'compoundCalculator.resultsSection.finalAmount.label': compoundInterestCalculatorTranslations[lang].resultsSection.finalAmount.label,
+    'compoundCalculator.resultsSection.finalAmount.description': compoundInterestCalculatorTranslations[lang].resultsSection.finalAmount.description,
+    'compoundCalculator.resultsSection.pieChart.title': compoundInterestCalculatorTranslations[lang].resultsSection.pieChart.title,
+    'compoundCalculator.resultsSection.pieChart.startingAmount': compoundInterestCalculatorTranslations[lang].resultsSection.pieChart.startingAmount,
+    'compoundCalculator.resultsSection.pieChart.totalContributions': compoundInterestCalculatorTranslations[lang].resultsSection.pieChart.totalContributions,
+    'compoundCalculator.resultsSection.pieChart.interest': compoundInterestCalculatorTranslations[lang].resultsSection.pieChart.interest,
+    
+    // Charts Section
+    'compoundCalculator.chartsSection.title': compoundInterestCalculatorTranslations[lang].chartsSection.title,
+    'compoundCalculator.chartsSection.growthChart.title': compoundInterestCalculatorTranslations[lang].chartsSection.growthChart.title,
+    'compoundCalculator.chartsSection.growthChart.xAxisLabel': compoundInterestCalculatorTranslations[lang].chartsSection.growthChart.xAxisLabel,
+    'compoundCalculator.chartsSection.growthChart.yAxisLabel': compoundInterestCalculatorTranslations[lang].chartsSection.growthChart.yAxisLabel,
+    'compoundCalculator.chartsSection.growthChart.tooltipPrefix': compoundInterestCalculatorTranslations[lang].chartsSection.growthChart.tooltipPrefix,
+    
+    // Accumulation Schedule
+    'compoundCalculator.accumulationSchedule.title': compoundInterestCalculatorTranslations[lang].accumulationSchedule.title,
+    'compoundCalculator.accumulationSchedule.yearSelector.label': compoundInterestCalculatorTranslations[lang].accumulationSchedule.yearSelector.label,
+    'compoundCalculator.accumulationSchedule.yearSelector.allYears': compoundInterestCalculatorTranslations[lang].accumulationSchedule.yearSelector.allYears,
+    'compoundCalculator.accumulationSchedule.year': compoundInterestCalculatorTranslations[lang].accumulationSchedule.year,
+    'compoundCalculator.accumulationSchedule.month': compoundInterestCalculatorTranslations[lang].accumulationSchedule.month,
+    'compoundCalculator.accumulationSchedule.yearLabel': compoundInterestCalculatorTranslations[lang].accumulationSchedule.yearLabel,
+    'compoundCalculator.accumulationSchedule.monthLabel': compoundInterestCalculatorTranslations[lang].accumulationSchedule.monthLabel,
+    'compoundCalculator.accumulationSchedule.startingBalance': compoundInterestCalculatorTranslations[lang].accumulationSchedule.startingBalance,
+    'compoundCalculator.accumulationSchedule.contribution': compoundInterestCalculatorTranslations[lang].accumulationSchedule.contribution,
+    'compoundCalculator.accumulationSchedule.interest': compoundInterestCalculatorTranslations[lang].accumulationSchedule.interest,
+    'compoundCalculator.accumulationSchedule.endingBalance': compoundInterestCalculatorTranslations[lang].accumulationSchedule.endingBalance,
     
     // Profile Menu
     'profile.stats.lessonsCompleted': profileMenuTranslations[lang].stats.lessonsCompleted,

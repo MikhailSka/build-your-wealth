@@ -235,30 +235,7 @@
   }
 }
 
-/* Grid Pattern - Changed to absolute positioning */
-.grid-pattern {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 1;
-  pointer-events: none;
-  width: 100%;
-  height: 100%;
-}
 
-.grid-svg {
-  width: 100%;
-  height: 100%;
-  color: var(--text-tertiary);
-  opacity: 0.2;
-}
-
-/* Fixed Grid Pattern */
-.grid-pattern svg defs pattern path {
-  d: path("M 10 0 L 0 0 0 10");
-}
 
 /* Animated Dots - Changed to absolute positioning */
 .animated-dots {
@@ -356,10 +333,6 @@
   display: none;
 }
 
-.financial-background.minimal .grid-pattern {
-  opacity: 0.3;
-}
-
 /* Mobile Responsive Design */
 @media (max-width: 768px) {
   .chart-small {
@@ -409,10 +382,6 @@
   .dot {
     animation: none;
   }
-  
-  .financial-background.minimal .grid-pattern {
-    opacity: 0.1;
-  }
 }
 
 /* Dark theme specific adjustments */
@@ -428,8 +397,4 @@
 [data-theme="dark"] .dot {
   background: var(--primary-400);
   opacity: 0.4;
-}
-
-[data-theme="dark"] .grid-svg {
-  color: var(--border-primary);
 } 

@@ -7,9 +7,11 @@ export interface Lesson {
   category: string;
   tags: string[];
   youtubeUrl?: string;
+  youtubeId?: string;
   thumbnailUrl?: string;
   publishedAt: string;
   isCompleted?: boolean;
+  isNew?: boolean;
   hasCalculator?: boolean;
   hasCharts?: boolean;
   hasVisualizations?: boolean;

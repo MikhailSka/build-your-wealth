@@ -33,7 +33,7 @@ export default function RootLayout({
         <LanguageProvider>
           <ThemeProvider>
             <div key="app-content">
-              {children}
+        {children}
             </div>
           </ThemeProvider>
         </LanguageProvider>

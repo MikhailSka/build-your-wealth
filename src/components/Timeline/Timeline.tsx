@@ -3,17 +3,20 @@
 import { TimelineProps } from '@/types/lesson';
 import { TimelineItem } from './TimelineItem';
 import { SearchBar } from '../SearchBar/SearchBar';
+import { Lesson } from '@/types/lesson';
 import './Timeline.css';
 
 interface TimelineComponentProps extends TimelineProps {
   onSearch: (query: string) => void;
+  onComplete?: (lesson: Lesson) => void;
 }
 
 export const Timeline: React.FC<TimelineComponentProps> = ({ 
   lessons, 
   searchQuery, 
   onLessonClick,
-  onSearch
+  onSearch,
+  onComplete
 }) => {
   const filteredLessons = lessons.filter(lesson => {
     if (!searchQuery) return true;
@@ -25,17 +28,6 @@ export const Timeline: React.FC<TimelineComponentProps> = ({
       lesson.tags.some(tag => tag.toLowerCase().includes(query))
     );
   });
-
-  if (filteredLessons.length === 0) {
-    return (
-      <div className="timeline-empty">
-        <div className="empty-state">
-          <h3>No lessons found</h3>
-          <p>Try adjusting your search terms or browse all lessons.</p>
-        </div>
-      </div>
-    );
-  }
 
   return (
     <div className="timeline">
@@ -49,15 +41,25 @@ export const Timeline: React.FC<TimelineComponentProps> = ({
       </div>
       
       <div className="timeline-container">
-        {filteredLessons.map((lesson, index) => (
-          <TimelineItem
-            key={lesson.id}
-            lesson={lesson}
-            index={index}
-            onClick={() => onLessonClick(lesson)}
-            isLast={index === filteredLessons.length - 1}
-          />
-        ))}
+        {filteredLessons.length === 0 ? (
+          <div className="timeline-empty-state">
+            <div className="empty-state">
+              <h3>No lessons found</h3>
+              <p>Try adjusting your search terms or browse all lessons.</p>
+            </div>
+          </div>
+        ) : (
+          filteredLessons.map((lesson, index) => (
+            <TimelineItem
+              key={lesson.id}
+              lesson={lesson}
+              index={index}
+              onClick={() => onLessonClick(lesson)}
+              onComplete={onComplete}
+              isLast={index === filteredLessons.length - 1}
+            />
+          ))
+        )}
       </div>
     </div>
   );
