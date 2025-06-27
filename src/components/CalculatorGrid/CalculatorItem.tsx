@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import { LucideIcon } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 
@@ -12,6 +13,12 @@ interface CalculatorItemProps {
 
 export function CalculatorItem({ title, description, icon: IconComponent, comingSoon, onClick }: CalculatorItemProps) {
   const { t } = useLanguage();
+  const [mounted, setMounted] = useState(false);
+
+  // Prevent hydration mismatch by ensuring consistent rendering
+  useEffect(() => {
+    setMounted(true);
+  }, []);
   
   const handleClick = () => {
     if (!comingSoon && onClick) {
@@ -21,20 +28,27 @@ export function CalculatorItem({ title, description, icon: IconComponent, coming
 
   return (
     <>
-      <div className={`calculator-card ${!comingSoon ? 'clickable' : ''}`} onClick={handleClick}>
-        <div className="calculator-icon">
-          <IconComponent size={32} />
-        </div>
-        <div className="calculator-content">
-          <h3>{title}</h3>
-          <p>{description}</p>
-          {comingSoon && (
-            <span className="coming-soon-badge">{t('calculators.comingSoon')}</span>
-          )}
+      <div className="calculator-wrapper">
+        {comingSoon && (
+          <div className="coming-soon-bubble">{mounted ? t('calculators.comingSoon') : 'Coming Soon'}</div>
+        )}
+        <div className={`calculator-card ${!comingSoon ? 'clickable' : ''}`} onClick={handleClick}>
+          <div className="calculator-icon">
+            <IconComponent size={32} />
+          </div>
+          <div className="calculator-content">
+            <h3>{title}</h3>
+            <p>{description}</p>
+          </div>
         </div>
       </div>
 
       <style jsx>{`
+        .calculator-wrapper {
+          position: relative;
+          display: inline-block;
+        }
+
         .calculator-card {
           background: var(--bg-secondary);
           border: 1px solid var(--border-primary);
@@ -45,16 +59,35 @@ export function CalculatorItem({ title, description, icon: IconComponent, coming
           min-height: 280px;
           max-width: 280px;
           max-height: 280px;
-          padding: 1.5rem;
+          padding: 1.2rem;
           transition: all var(--transition-normal) cubic-bezier(0.4, 0, 0.2, 1);
           position: relative;
           overflow: hidden;
           display: flex;
           flex-direction: column;
           align-items: center;
-          justify-content: center;
+          justify-content: space-between;
           text-align: center;
           box-sizing: border-box;
+        }
+
+        .calculator-card:not(.clickable) {
+          opacity: 0.6;
+          filter: grayscale(30%);
+        }
+
+        .calculator-card:not(.clickable) .calculator-icon {
+          opacity: 0.7;
+          background: var(--bg-tertiary);
+          color: var(--text-secondary);
+        }
+
+        .calculator-card:not(.clickable) .calculator-content h3 {
+          color: var(--text-secondary);
+        }
+
+        .calculator-card:not(.clickable) .calculator-content p {
+          color: var(--text-tertiary);
         }
 
         .calculator-card.clickable {
@@ -89,17 +122,16 @@ export function CalculatorItem({ title, description, icon: IconComponent, coming
         }
 
         .calculator-icon {
-          width: 56px;
-          height: 56px;
-          min-width: 56px;
-          min-height: 56px;
+          width: 44px;
+          height: 44px;
+          min-width: 44px;
+          min-height: 44px;
           background: var(--primary-100);
           border-radius: 50%;
           display: flex;
           align-items: center;
           justify-content: center;
           color: var(--primary-600);
-          margin-bottom: 1rem;
           transition: all var(--transition-normal) ease;
           flex-shrink: 0;
         }
@@ -118,45 +150,58 @@ export function CalculatorItem({ title, description, icon: IconComponent, coming
           justify-content: center;
           max-width: 100%;
           overflow: hidden;
+          margin: 0.5rem 0;
         }
 
         .calculator-content h3 {
-          font-size: 1.125rem;
+          font-size: clamp(0.8rem, 2.5vw, 0.95rem);
           font-weight: 700;
           color: var(--text-primary);
-          margin-bottom: 0.5rem;
-          line-height: 1.2;
+          margin-bottom: 0.4rem;
+          line-height: 1.1;
           text-align: center;
           word-wrap: break-word;
           hyphens: auto;
+          overflow-wrap: break-word;
+          width: 100%;
         }
 
         .calculator-content p {
           color: var(--text-secondary);
-          font-size: 0.8rem;
-          line-height: 1.4;
-          margin-bottom: 0.75rem;
+          font-size: clamp(0.65rem, 2vw, 0.72rem);
+          line-height: 1.2;
+          margin-bottom: 0.4rem;
           text-align: center;
           word-wrap: break-word;
           hyphens: auto;
-          display: -webkit-box;
-          -webkit-line-clamp: 3;
-          -webkit-box-orient: vertical;
-          overflow: hidden;
+          overflow-wrap: break-word;
+          width: 100%;
         }
 
-        .coming-soon-badge {
-          display: inline-block;
-          background: var(--accent-100);
-          color: var(--accent-700);
-          font-size: 0.65rem;
-          font-weight: 600;
-          padding: 0.2rem 0.6rem;
-          border-radius: var(--radius-full);
+        .coming-soon-bubble {
+          position: absolute;
+          top: 0;
+          right: 0;
+          width: 50px;
+          height: 50px;
+          background: #fbbf24;
+          color: #1f2937;
+          font-size: 0.45rem;
+          font-weight: 800;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border-radius: 50%;
           text-transform: uppercase;
-          letter-spacing: 0.05em;
-          white-space: nowrap;
-          flex-shrink: 0;
+          letter-spacing: 0.02em;
+          z-index: 1000;
+          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+          transform: translate(25%, -25%);
+          padding: 0.2rem;
+          text-align: center;
+          line-height: 0.9;
+          word-break: break-word;
+          hyphens: auto;
         }
 
         @media (max-width: 768px) {
@@ -167,27 +212,21 @@ export function CalculatorItem({ title, description, icon: IconComponent, coming
             min-height: 240px;
             max-width: 240px;
             max-height: 240px;
-            padding: 1.25rem;
+            padding: 1rem;
           }
 
           .calculator-icon {
-            width: 48px;
-            height: 48px;
-            min-width: 48px;
-            min-height: 48px;
+            width: 38px;
+            height: 38px;
+            min-width: 38px;
+            min-height: 38px;
           }
 
-          .calculator-content h3 {
-            font-size: 1rem;
-          }
-
-          .calculator-content p {
-            font-size: 0.75rem;
-          }
-
-          .coming-soon-badge {
-            font-size: 0.6rem;
-            padding: 0.15rem 0.5rem;
+          .coming-soon-bubble {
+            width: 44px;
+            height: 44px;
+            font-size: 0.4rem;
+            transform: translate(20%, -20%);
           }
         }
 
@@ -199,31 +238,21 @@ export function CalculatorItem({ title, description, icon: IconComponent, coming
             min-height: 200px;
             max-width: 200px;
             max-height: 200px;
-            padding: 1rem;
+            padding: 0.8rem;
           }
 
           .calculator-icon {
-            width: 40px;
-            height: 40px;
-            min-width: 40px;
-            min-height: 40px;
-            margin-bottom: 0.75rem;
+            width: 32px;
+            height: 32px;
+            min-width: 32px;
+            min-height: 32px;
           }
 
-          .calculator-content h3 {
-            font-size: 0.9rem;
-            margin-bottom: 0.4rem;
-          }
-
-          .calculator-content p {
-            font-size: 0.7rem;
-            margin-bottom: 0.5rem;
-            -webkit-line-clamp: 2;
-          }
-
-          .coming-soon-badge {
-            font-size: 0.55rem;
-            padding: 0.1rem 0.4rem;
+          .coming-soon-bubble {
+            width: 38px;
+            height: 38px;
+            font-size: 0.35rem;
+            transform: translate(15%, -15%);
           }
         }
       `}</style>

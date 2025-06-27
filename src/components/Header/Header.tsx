@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { User, Bell, Menu, X, Sun, Moon, Settings, BookOpen, BarChart3, LogOut, Mail } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
@@ -19,9 +19,15 @@ interface HeaderProps {
 export const Header: React.FC<HeaderProps> = ({ onSearch }) => {
   const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
   const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const pathname = usePathname();
   const { theme, toggleTheme } = useTheme();
   const { t } = useLanguage();
+
+  // Prevent hydration mismatch by ensuring consistent rendering
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const closeMobileSidebar = () => {
     setIsMobileSidebarOpen(false);
@@ -39,7 +45,7 @@ export const Header: React.FC<HeaderProps> = ({ onSearch }) => {
           <div className="header-left">
             <Link href="/" className="logo-link">
               <div>
-                <h1 className="app-title">{t('header.title')}</h1>
+                <h1 className="app-title">{mounted ? t('header.title') : 'Build Your Wealth'}</h1>
                 <p className="app-subtitle">Master the art of investing</p>
               </div>
             </Link>
@@ -51,13 +57,13 @@ export const Header: React.FC<HeaderProps> = ({ onSearch }) => {
               href="/lessons" 
               className={`nav-link ${pathname === '/lessons' ? 'active' : ''}`}
             >
-              {t('nav.lessons')}
+              {mounted ? t('nav.lessons') : 'Lessons'}
             </Link>
             <Link 
               href="/calculators" 
               className={`nav-link ${pathname === '/calculators' ? 'active' : ''}`}
             >
-              {t('nav.calculators')}
+              {mounted ? t('nav.calculators') : 'Calculators'}
             </Link>
           </nav>
           
@@ -123,21 +129,21 @@ export const Header: React.FC<HeaderProps> = ({ onSearch }) => {
                   className={`mobile-nav-link ${pathname === '/' ? 'active' : ''}`}
                   onClick={closeMobileSidebar}
                 >
-                  {t('nav.home')}
+                  {mounted ? t('nav.home') : 'Home'}
                 </Link>
                 <Link 
                   href="/lessons" 
                   className={`mobile-nav-link ${pathname === '/lessons' ? 'active' : ''}`}
                   onClick={closeMobileSidebar}
                 >
-                  {t('nav.lessons')}
+                  {mounted ? t('nav.lessons') : 'Lessons'}
                 </Link>
                 <Link 
                   href="/calculators" 
                   className={`mobile-nav-link ${pathname === '/calculators' ? 'active' : ''}`}
                   onClick={closeMobileSidebar}
                 >
-                  {t('nav.calculators')}
+                  {mounted ? t('nav.calculators') : 'Calculators'}
                 </Link>
               </nav>
 
@@ -166,11 +172,11 @@ export const Header: React.FC<HeaderProps> = ({ onSearch }) => {
                     <div className="mobile-profile-stats">
                       <div className="mobile-stat">
                         <span className="mobile-stat-value">12</span>
-                        <span className="mobile-stat-label">{t('profile.stats.lessonsCompleted')}</span>
+                        <span className="mobile-stat-label">{mounted ? t('profile.stats.lessonsCompleted') : 'Lessons Completed'}</span>
                       </div>
                       <div className="mobile-stat">
                         <span className="mobile-stat-value">24</span>
-                        <span className="mobile-stat-label">{t('profile.stats.hoursLearned')}</span>
+                        <span className="mobile-stat-label">{mounted ? t('profile.stats.hoursLearned') : 'Hours Learned'}</span>
                       </div>
                     </div>
                   </div>
@@ -178,7 +184,7 @@ export const Header: React.FC<HeaderProps> = ({ onSearch }) => {
                   <div className="mobile-profile-menu">
                     <a href="#" className="mobile-profile-item" onClick={closeMobileSidebar}>
                       <BookOpen size={18} />
-                      <span>{t('profile.menu.profile')}</span>
+                      <span>{mounted ? t('profile.menu.profile') : 'Profile'}</span>
                     </a>
                     <a href="#" className="mobile-profile-item" onClick={closeMobileSidebar}>
                       <BarChart3 size={18} />
@@ -186,7 +192,7 @@ export const Header: React.FC<HeaderProps> = ({ onSearch }) => {
                     </a>
                     <a href="#" className="mobile-profile-item" onClick={closeMobileSidebar}>
                       <Bell size={18} />
-                      <span>{t('profile.menu.notifications')}</span>
+                      <span>{mounted ? t('profile.menu.notifications') : 'Notifications'}</span>
                     </a>
                     <a href="#" className="mobile-profile-item" onClick={closeMobileSidebar}>
                       <Mail size={18} />
@@ -194,13 +200,13 @@ export const Header: React.FC<HeaderProps> = ({ onSearch }) => {
                     </a>
                     <a href="#" className="mobile-profile-item" onClick={closeMobileSidebar}>
                       <Settings size={18} />
-                      <span>{t('profile.menu.settings')}</span>
+                      <span>{mounted ? t('profile.menu.settings') : 'Settings'}</span>
                     </a>
                   </div>
 
                   <button className="mobile-logout-button" onClick={handleLogout}>
                     <LogOut size={18} />
-                    <span>{t('profile.menu.logout')}</span>
+                    <span>{mounted ? t('profile.menu.logout') : 'Logout'}</span>
                   </button>
                 </div>
               </div>

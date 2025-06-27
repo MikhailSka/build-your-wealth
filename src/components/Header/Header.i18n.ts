@@ -13,7 +13,7 @@ export const headerTranslations = {
     },
   },
   ru: {
-    title: 'Создай Своё Богатство',
+    title: 'Build Your Wealth',
     search: {
       placeholder: 'Поиск уроков, калькуляторов, тем...',
     },

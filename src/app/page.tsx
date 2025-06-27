@@ -1,5 +1,6 @@
 'use client';
 
+import { useState, useEffect } from 'react';
 import { Header } from '@/components/Header/Header';
 import { FinancialBackground } from '@/components/FinancialBackground/FinancialBackground';
 import { useTheme } from '@/contexts/ThemeContext';
@@ -10,22 +11,28 @@ import Link from 'next/link';
 export default function Home() {
   const { theme } = useTheme();
   const { t } = useLanguage();
+  const [mounted, setMounted] = useState(false);
+
+  // Prevent hydration mismatch by ensuring consistent rendering
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const features = [
     {
       icon: BookOpen,
-      title: t('home.features.lessons'),
-      description: t('home.features.lessons.desc'),
+      title: mounted ? t('home.features.lessons') : 'Expert-Led Lessons',
+      description: mounted ? t('home.features.lessonsDesc') : 'Learn from industry professionals and experts',
     },
     {
       icon: Calculator,
-      title: t('home.features.calculators'),
-      description: t('home.features.calculators.desc'),
+      title: mounted ? t('home.features.calculators') : 'Interactive Calculators',
+      description: mounted ? t('home.features.calculatorsDesc') : 'Powerful tools to plan your financial future',
     },
     {
       icon: TrendingUp,
-      title: t('home.features.tracking'),
-      description: t('home.features.tracking.desc'),
+      title: mounted ? t('home.features.tracking') : 'Progress Tracking',
+      description: mounted ? t('home.features.trackingDesc') : 'Monitor your learning journey and achievements',
     },
     {
       icon: Shield,
@@ -53,18 +60,18 @@ export default function Home() {
             <div className="max-width-container">
               <div className="hero-content">
                 <h1 className="hero-title">
-                  {t('home.welcome')}
+                  {mounted ? t('home.welcome') : 'Welcome to Your Financial Journey'}
                 </h1>
                 <p className="hero-description">
-                  {t('home.subtitle')}
+                  {mounted ? t('home.subtitle') : 'Master the fundamentals of investing and build lasting wealth through our comprehensive learning platform.'}
                 </p>
                 <div className="hero-actions">
                   <Link href="/lessons" className="cta-button primary">
-                    {t('home.cta.start')}
+                    {mounted ? t('home.cta.start') : 'Start Learning'}
                     <BookOpen size={20} />
                   </Link>
                   <Link href="/calculators" className="cta-button secondary">
-                    {t('home.cta.explore')}
+                    {mounted ? t('home.cta.explore') : 'Explore Calculators'}
                     <Calculator size={20} />
                   </Link>
                 </div>

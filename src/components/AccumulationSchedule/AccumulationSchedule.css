@@ -1,0 +1,141 @@
+.accumulation-schedule {
+  grid-column: 1 / -1;
+  margin-top: 2rem;
+}
+
+.section-header {
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid var(--border-primary);
+}
+
+.section-header h3 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.schedule-table-container {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  margin-top: 1.5rem;
+}
+
+.schedule-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+}
+
+.schedule-table th {
+  background: var(--bg-tertiary);
+  color: var(--text-primary);
+  font-weight: 600;
+  padding: 0.75rem;
+  text-align: right;
+  border-bottom: 1px solid var(--border-primary);
+  vertical-align: middle;
+}
+
+.schedule-table th:first-child {
+  text-align: left;
+}
+
+.schedule-table td {
+  padding: 0.75rem;
+  text-align: right;
+  border-bottom: 1px solid var(--border-primary);
+  color: var(--text-primary);
+  vertical-align: middle;
+}
+
+.schedule-table td:first-child {
+  text-align: left;
+  font-weight: 500;
+}
+
+.schedule-table tr:hover {
+  background: var(--bg-tertiary);
+}
+
+.schedule-table tr:last-child td {
+  border-bottom: none;
+}
+
+/* Expandable row styles */
+.expandable-row {
+  cursor: pointer;
+  position: relative;
+}
+
+.expandable-row td:first-child {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  vertical-align: middle;
+}
+
+.expand-icon {
+  transition: transform var(--transition-normal) ease;
+  color: var(--text-secondary);
+}
+
+.expandable-row.expanded .expand-icon {
+  transform: rotate(90deg);
+}
+
+.monthly-details {
+  background: var(--bg-primary);
+}
+
+.monthly-details td {
+  padding-left: 2rem;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  border-bottom: 1px solid var(--border-secondary);
+}
+
+.monthly-details td:first-child {
+  color: var(--text-primary);
+  font-weight: 400;
+}
+
+.monthly-details:last-child td {
+  border-bottom: 1px solid var(--border-primary);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .schedule-table {
+    font-size: 0.8rem;
+  }
+  
+  .schedule-table th,
+  .schedule-table td {
+    padding: 0.5rem 0.4rem;
+  }
+  
+  .monthly-details td {
+    padding-left: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .schedule-table {
+    font-size: 0.75rem;
+  }
+  
+  .schedule-table th,
+  .schedule-table td {
+    padding: 0.4rem 0.3rem;
+  }
+  
+  .monthly-details td {
+    padding-left: 1rem;
+  }
+} 

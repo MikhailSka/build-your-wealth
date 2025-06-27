@@ -15,7 +15,8 @@ export const compoundInterestCalculatorTranslations = {
       
       investmentPeriod: {
         label: 'Investment Period',
-        info: 'The number of years you plan to keep your money invested. Longer periods typically result in more significant compound growth.'
+        info: 'The number of years you plan to keep your money invested. Longer periods typically result in more significant compound growth.',
+        suffix: 'years'
       },
       
       returnRate: {
@@ -124,7 +125,8 @@ export const compoundInterestCalculatorTranslations = {
       
       investmentPeriod: {
         label: 'Период Инвестиций',
-        info: 'Количество лет, в течение которых вы планируете держать деньги в инвестициях. Более длительные периоды обычно приводят к более значительному росту сложных процентов.'
+        info: 'Количество лет, в течение которых вы планируете держать деньги в инвестициях. Более длительные периоды обычно приводят к более значительному росту сложных процентов.',
+        suffix: 'лет'
       },
       
       returnRate: {

@@ -15,8 +15,11 @@ const LanguageContext = createContext<LanguageContextType | undefined>(undefined
 export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const { t } = useTranslation();
   const [currentLanguage, setCurrentLanguage] = useState('en');
+  const [isClient, setIsClient] = useState(false);
 
   const changeLanguage = async (lang: string) => {
+    if (!isClient) return; // Prevent server-side execution
+    
     try {
       console.log('Changing language from', currentLanguage, 'to', lang);
       
@@ -35,6 +38,13 @@ export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ chil
   };
 
   useEffect(() => {
+    // Mark as client-side to prevent hydration mismatch
+    setIsClient(true);
+  }, []);
+
+  useEffect(() => {
+    if (!isClient) return;
+    
     // Wait for i18n to be initialized
     const initializeLanguage = async () => {
       try {
@@ -74,7 +84,7 @@ export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     };
 
     initializeLanguage();
-  }, []);
+  }, [isClient]);
 
   return (
     <LanguageContext.Provider
